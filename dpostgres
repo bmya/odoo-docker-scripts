@@ -1,0 +1,4 @@
+#!/bin/bash
+docker run --rm --name="postgres" \
+  -v /opt/database:/var/lib/postgresql/data \
+  -v /var/log/postgresql:/var/log/postgresql postgres:9.3

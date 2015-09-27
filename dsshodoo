@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -it --link odoo:odoo --rm bmya/odoo-bmya:latest /bin/bash
