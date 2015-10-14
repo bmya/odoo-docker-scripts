@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Stop old instances
+docker rm -f postgres
+docker rm -f odoo
+docker rm -f aeroo_docs
+
+# run postgres
+docker run -d --name="postgres" \
+-p 5432:5432 \
+--restart="always" \
+  -v /opt/database:/var/lib/postgresql/data \
+  -v /var/log/postgresql:/var/log/postgresql postgres:9.3
+
+# run aeroo
+docker run -d --name="aeroo_docs" \
+--restart="always" \
+-p 8989:8989 \
+bmya/aeroo-docs
+
+# run odoo
+#docker run -d --name="odoo" \
+#-v /opt/odoo/test-addons:/mnt/test-addons \
+# -v /opt/odoo/cnftest:/etc/odoo \
+#-p 127.0.0.1:8069:8069 \
+#--link postgres:db \
+#--link aeroo_docs:aeroo \
+# -t bmya/odoo-bmya:latest -- -d cintelec_prod1 -u all
+
+
+# run odoo
+docker run -d --name="odoo" \
+--restart="always" \
+-v /opt/odoo/test-addons:/mnt/test-addons \
+-v /opt/odoo/conf:/etc/odoo \
+-p 127.0.0.1:8069:8069 \
+--link postgres:db \
+--link aeroo_docs:aeroo \
+ -t bmya/odoo-bmya:latest
+
+docker ps
+
+docker attach odoo
+

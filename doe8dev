@@ -1,0 +1,11 @@
+#!/bin/bash
+docker run --rm -ti -p 8069:8069 \
+	-v /opt/odoo/stable-addons/bmya/odoo-addons:/mnt/extra-addons \
+	-v /opt/odoo/stable-addons/bmya/odoo-chile:/mnt/test-addons \
+-v /opt/odoo/confupdate:/etc/odoo \
+	--name odoo_clean \
+	--link postgres:db \
+	-t bmya/odoo:latest
+# sudo -H -u odoo /bin/bash
+# sudo -H -u odoo /usr/bin/odoo.py -c /etc/odoo/openerp-server.conf --update=all -d demo1
+
