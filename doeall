@@ -25,14 +25,19 @@ docker run -d --name="odoo" \
 -v /opt/odoo/conf:/etc/odoo \
 --link postgres:db \
 --link aeroo_docs:aeroo \
--t bmya/odoo-bmya:srsr8
-# -- -d alphapro -u all
+-t bmya/odoo-bmya:l8
+# -- -d basedato -u all --without-demo=all
 
 docker run -d --name="nginx" \
 --restart="always" \
 --link odoo:odoo \
 -v /opt/nginx:/etc/nginx/conf.d \
--p 80:80 nginx 
+-p 80:80 nginx
+
+# echo "Lapso 10 segundos. Por favor espere...."
+# sleep 10
+
+# docker restart nginx
 
 docker ps
 
