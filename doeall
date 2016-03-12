@@ -25,7 +25,7 @@ docker run -d --name="odoo" \
 -v /opt/odoo/conf:/etc/odoo \
 --link postgres:db \
 --link aeroo_docs:aeroo \
--t bmya/odoo-bmya:t9
+-t bmya/odoo-bmya:t10
 # -- -d basedato -u all --without-demo=all
 
 docker run -d --name="nginx" \
