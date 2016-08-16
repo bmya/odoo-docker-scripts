@@ -35,6 +35,6 @@ cd /opt/odoo/conf
 curl -O https://raw.githubusercontent.com/bmya/docker-odoo-bmya/master/openerp-server.conf
 cd /opt/odoo
 curl -O https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/doeall
-sed -i "s/nombre_db/"$db_name"/" doeall
+sed -i "s/nombre_bd/"$db_name"/" doeall
 
 echo "Instalacion principal terminada. Una vez que se reinicie el servidor corre '/opt/odoo/doeall' para levantar los servicios"
