@@ -29,10 +29,12 @@ sed -i "s/nombre_bd/"$db_name"/" default.conf
 docker run -d --restart="always" --name="postgres" \
 -v /opt/database:/var/lib/postgresql/data \
 -v /var/log/postgresql:/var/log/postgresql postgres:9.4
-cat createodoo.sql | docker exec -i postgres psql -Upostgres
 curl -s https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/createodoo.sql | docker exec -i postgres psql -Upostgres
+echo 'CREATE DATABASE '$db_name';GRANT ALL PRIVILEGES ON DATABASE '$db_name' TO '${USER}';' | docker exec -i postgres psql -Upostgres
 cd /opt/odoo/conf
 curl -O https://raw.githubusercontent.com/bmya/docker-odoo-bmya/master/openerp-server.conf
 cd /opt/odoo
 curl -O https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/doeall
+sed -i "s/nombre_db/"$db_name"/" doeall
+
 echo "Instalacion principal terminada. Una vez que se reinicie el servidor corre '/opt/odoo/doeall' para levantar los servicios"
