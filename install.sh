@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author:
+# Blanco Martin y Asociados - Daniel Blanco daniel[at]blancomartin.cl
 # Ask the user for their name
 # descarga antes de correr
 # curl -s https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/install.sh | bash
