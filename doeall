@@ -15,7 +15,7 @@ docker run -d --name="odoo" --restart="always" \
 -v /opt/odoo/.filestore:/opt/odoo/.filestore \
 -v /opt/odoo/conf:/etc/odoo \
 --link aeroo_docs:aeroo \
---link postgres:db -t bmya/odoo-bmya:t13
+--link postgres:db -t bmya/odoo-bmya:t14 -- -d nombre_bd
 
 docker run -d --name="nginx" --restart="always" \
 --link odoo:odoo \
