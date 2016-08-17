@@ -8,7 +8,7 @@ sudo mkdir -p /opt/database
 sudo mkdir -p /opt/odoo/.filelocal
 sudo mkdir -p /var/log/postgresql
 sudo mkdir -p /opt/odoo/conf
-sudo mkdir -p /opt/odoo/extra-addons
+sudo mkdir -p /opt/odoo/extra-addons/odoo-chile
 sudo mkdir -p /opt/nginx
 sudo curl -s https://get.docker.com/ | bash
 sudo gpasswd -a ${USER} docker
@@ -38,5 +38,5 @@ curl -O https://raw.githubusercontent.com/bmya/docker-odoo-bmya/master/openerp-s
 cd /opt/odoo
 curl -O https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/doeall
 sed -i "s/nombre_bd/"$db_name"/" doeall
-
+sudo chmod +x /opt/odoo/doeall
 echo "Instalacion principal terminada. Una vez que se reinicie el servidor corre '/opt/odoo/doeall' para levantar los servicios"
