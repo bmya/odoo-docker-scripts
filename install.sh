@@ -32,7 +32,7 @@ docker run -d --restart="always" --name="postgres" \
 -v /opt/database:/var/lib/postgresql/data \
 -v /var/log/postgresql:/var/log/postgresql postgres:9.4
 curl -s https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/createodoo.sql | docker exec -i postgres psql -Upostgres
-echo 'CREATE DATABASE '$db_name';GRANT ALL PRIVILEGES ON DATABASE '$db_name' TO '${USER}';' | docker exec -i postgres psql -Upostgres
+# echo 'CREATE DATABASE '$db_name';GRANT ALL PRIVILEGES ON DATABASE '$db_name' TO '${USER}';' | docker exec -i postgres psql -Upostgres
 cd /opt/odoo/conf
 curl -O https://raw.githubusercontent.com/bmya/docker-odoo-bmya/master/openerp-server.conf
 cd /opt/odoo
