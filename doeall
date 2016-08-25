@@ -1,6 +1,15 @@
 #!/bin/bash
 
+# Esta linea voltea todos los contenedores juntos...
 docker rm -f $(docker ps -q)
+# ... pero se pueden voltear individualmente
+# ideal, destruir y reconstruir solo odoo y nginx
+# y dejar funcionando postgres y aeroo_docs
+## docker rm -f postgres
+## docker rm -f aeroo_docs
+# docker rm -f odoo
+# docker rm -f nginx
+
 
 docker run -d --name="postgres" --restart="always" \
 -p 127.0.0.1:5432:5432 \
@@ -10,12 +19,18 @@ docker run -d --name="postgres" --restart="always" \
 # run aeroo
 docker run -d --name="aeroo_docs" --restart="always" bmya/aeroo-docs
 
+# el enlace /opt/odoo/conf:/etc/odoo sirve para tener el archivo
+# de configuración separado del docker, para poder cambiar la
+# contraseña, o hacer mantenimiento separado del mismo.
+# se puede descargar directamente con:
+# curl -O https://raw.githubusercontent.com/bmya/docker-odoo-bmya/master/openerp-server.conf
 docker run -d --name="odoo" --restart="always" \
 -v /opt/odoo/extra-addons:/mnt/extra-addons \
 -v /opt/odoo/.filestore:/opt/odoo/.filestore \
 -v /opt/odoo/conf:/etc/odoo \
 --link aeroo_docs:aeroo \
---link postgres:db -t bmya/odoo-bmya:t14 -- -d nombre_bd
+--link postgres:db -t bmya/odoo-bmya:t15
+# -- -d nombre_bd
 
 docker run -d --name="nginx" --restart="always" \
 --link odoo:odoo \
