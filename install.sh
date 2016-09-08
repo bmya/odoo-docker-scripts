@@ -25,8 +25,8 @@ echo Selecciona el nombre de la base de datos que deseas filtrar con el dominio:
 read db_name
 echo La base de datos elegida es $db_name
 echo
-sed -i "s/nombre_srv/"$domain_name"/" default.conf
-sed -i "s/nombre_bd/"$db_name"/" default.conf
+# sed -i "s/nombre_srv/"$domain_name"/" default.conf
+# sed -i "s/nombre_bd/"$db_name"/" default.conf
 
 docker run -d --restart="always" --name="postgres" \
 -v /opt/database:/var/lib/postgresql/data \
