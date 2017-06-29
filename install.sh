@@ -5,7 +5,7 @@
 # descarga antes de correr
 # curl -s https://raw.githubusercontent.com/bmya/odoo-docker-scripts/master/install.sh | bash
 sudo mkdir -p /opt/database
-sudo mkdir -p /opt/odoo/.filelocal
+sudo mkdir -p /opt/odoo/.filestore
 sudo mkdir -p /var/log/postgresql
 sudo mkdir -p /opt/odoo/conf
 sudo mkdir -p /opt/odoo/extra-addons/odoo-chile
