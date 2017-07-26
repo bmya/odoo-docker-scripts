@@ -1,0 +1,51 @@
+version: '2'
+services:
+  app:
+    restart: always
+    container_name: odoo
+    image: bmya/odoo-bmya:t22
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./extra-addons:/mnt/extra-addons
+      - ./conf:/etc/odoo
+      # - ./pysiidte:/usr/local/lib/python2.7/dist-packages/pysiidte-0.1-py2.7.egg
+    environment:
+      - DB_PORT_5432_TCP_ADDR=db
+      - DB_PORT_5432_TCP_PORT=5432
+      - DB_ENV_POSTGRES_USER=odoo  
+      - DB_ENV_POSTGRES_PASSWORD=odoo
+      #- CUSTOM_ADDONS=$CUSTOM_ADDONS
+      #- ADMIN_PASS=$ADMIN_PASS
+      #- SERVER_MODE=$SERVER_MODE
+      #- SERVER_WIDE_MODULES = $SERVER_WIDE_MODULES
+    networks:
+       - default
+       - nginx_default
+    external_links:
+      - aeroo_docs:aeroo
+  db:
+    restart: always
+    container_name: db
+    image: postgres:9.4
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - /var/log/postgresql:/var/log/postgresql
+      - odoo-db-data:/var/lib/postgresql/data
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+networks:
+  default:
+    driver: bridge
+  nginx_default:
+    external: true
+

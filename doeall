@@ -1,0 +1,12 @@
+#!/bin/bash
+docker rm -f $(docker ps -q)
+
+cd ~/nginx
+docker-compose up -d
+cd ~/odoo8
+docker-compose up -d
+
+docker ps
+docker-compose logs -f
+
+
